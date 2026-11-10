@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Quarkus Dev Mode",
+      "request": "launch",
+      "mainClass": "io.quarkus.runner.GeneratedMain",
+      "preLaunchTask": "quarkus:dev"
+    }
+  ]
+}

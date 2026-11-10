@@ -1,0 +1,84 @@
+# Cloud Build pipeline para sanitek_backend (Quarkus JVM)
+#
+# Pasos:
+#   1. Maven empaqueta el proyecto (genera target/quarkus-app)
+#   2. Docker construye la imagen JVM con APP_VERSION como build-arg
+#   3. Push a Artifact Registry con tags :<version> y :latest
+#   4. Deploy a Cloud Run
+#
+# Versión (primera que exista):
+#   - $TAG_NAME   (build disparado por git tag)
+#   - $SHORT_SHA  (push a branch)
+#   - "dev"       (build local sin git context)
+#
+# Requisitos previos en GCP:
+#   - Artifact Registry repository creado en ${_REGION}
+#   - Secrets en Secret Manager: "db-username", "db-password",
+#     "firebase-service-account" y "ApiKey"
+#   - Service account de Cloud Build con roles:
+#       roles/run.admin
+#       roles/iam.serviceAccountUser
+#       roles/artifactregistry.writer
+#       roles/secretmanager.secretAccessor
+#
+# Destino: ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}
+
+substitutions:
+  _REGION: us-central1
+  _REPOSITORY: sanitek-back                  # Nombre del repositorio en Artifact Registry
+  _IMAGE: sanitek-backend
+  _SERVICE: sanitek-backend             # Nombre del servicio en Cloud Run
+  _PROJECT_ID: sanitec-496405
+  _DB_JDBC_URL: ""
+  _FIREBASE_SERVICE_ACCOUNT_LOCATION: /secrets/firebase.json
+  _CORS_ORIGINS: "https://sanitek-frontend-443589660460.us-central1.run.app"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+  - id: package
+    name: maven:3.9-eclipse-temurin-21
+    entrypoint: mvn
+    args: ['-B', '-DskipTests', 'package']
+
+  - id: build-and-push
+    name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        set -e
+        VERSION="$${TAG_NAME:-$${SHORT_SHA:-dev}}"
+        IMAGE_BASE="${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}"
+        echo "Building $$IMAGE_BASE:$$VERSION"
+        docker build \
+          --build-arg APP_VERSION="$$VERSION" \
+          --tag "$$IMAGE_BASE:$$VERSION" \
+          --tag "$$IMAGE_BASE:latest" \
+          --file=Dockerfile \
+          .
+        docker push "$$IMAGE_BASE:$$VERSION"
+        docker push "$$IMAGE_BASE:latest"
+
+  - id: deploy
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        set -e
+        VERSION="$${TAG_NAME:-$${SHORT_SHA:-dev}}"
+        IMAGE="${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:$$VERSION"
+        gcloud run deploy ${_SERVICE} \
+          --image "$$IMAGE" \
+          --region ${_REGION} \
+          --platform managed \
+          --port 8080 \
+          --allow-unauthenticated \
+          --set-env-vars "DB_JDBC_URL=${_DB_JDBC_URL},DB_SCHEMA_STRATEGY=update,FIREBASE_SERVICE_ACCOUNT_LOCATION=${_FIREBASE_SERVICE_ACCOUNT_LOCATION},CORS_ORIGINS=${_CORS_ORIGINS}" \
+          --set-secrets "DB_USERNAME=db-username:latest,DB_PASSWORD=db-password:latest,FIREBASE_WEB_API_KEY=ApiKey:latest,/secrets/firebase.json=firebase-service-account:latest"
+        # Si usas Cloud SQL (recomendado), agrega también:
+        # --add-cloudsql-instances ${_PROJECT_ID}:${_REGION}:YOUR_INSTANCE_NAME
+
+timeout: 1800s

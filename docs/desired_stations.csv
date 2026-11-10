@@ -1,0 +1,37 @@
+id_station,station_name,municipality,latitude,longitude,altitude
+ACO,Acolman,ñaslkdjfs,19.635501,-98.912003,2198
+AJU,Ajusco,Tlalpan,19.154286,-99.162611,2942
+AJM,Ajusco Medio,Tlalpan,19.272161,-99.207744,2548
+ATI,Atizapan,ñaslkdjfs,19.576963,-99.254133,2341
+BJU,Benito Juarez,Benito Juarez,19.370464,-99.159596,2249
+CAM,Camarones,Azcapotzalco,19.468404,-99.169794,2233
+CCA,Centro de Ciencias de la Atmosfera,Coyoacan,19.326111,-99.176111,2294
+CHO,Chalco,Chalco,19.266948,-98.886088,2253
+COY,Coyoacan,Coyoacan,19.350258,-99.157101,2260
+CUA,Cuajimalpa,Cuajimalpa,19.365313,-99.291705,2704
+CUT,Cuautitlan,Cuautitlan,19.722186,-99.198602,2263
+FAC,Fes Acatlan,Naucalpan,19.482473,-99.243524,2299
+FAR,Fes Aragon,Nezahualcoyotl,19.473692,-99.046176,2230
+GAM,Gustavo A. Madero,Gustavo A. Madero,19.4827,-99.094517,2227
+HGM,Hospital General de Mexico,Cuauhtemoc,19.411617,-99.152207,2234
+INN,Investigaciones Nucleares,Ocoyoacac,19.291968,-99.38052,3082
+IZT,Iztacalco,Iztacalco,19.384413,-99.117641,2238
+LLA,Los Laureles,Ecatepec,19.578792,-99.039644,2245
+LPR,La Presa,Tlalnepantla,19.534727,-99.11772,2302
+MER,Merced,Venustiano Carranza,19.42461,-99.119594,2245
+MGH,Miguel Hidalgo,Miguel Hidalgo,19.40405,-99.20266,2327
+MON,Montecillo,ñaslkdjfs,19.460415,-98.902853,2252
+MPA,Milpa Alta,Milpa Alta,19.1769,-98.990189,2594
+NEZ,Nezahualcoyotl,Nezahualcoyotl,19.393734,-99.028212,2235
+PED,Pedregal,Alvaro Obregon,19.325146,-99.204136,2326
+SAC,Santiago Acahualtepec,Iztapalapa,19.34561,-99.009381,2293
+SAG,San Agustin,Ecatepec,19.532968,-99.030324,2241
+SFE,Santa Fe,Cuajimalpa,19.357357,-99.262865,2599
+SJA,San Juan Aragon,Gustavo A. Madero,19.452592,-99.086095,2258
+TAH,Tlahuac,Tlahuac,19.246459,-99.010564,2297
+TLA,Tlalnepantla,Tlalnepantla,19.529077,-99.204597,2311
+TLI,Tultitlan,Tultitlan,19.602542,-99.177173,2313
+UAX,UAM Xochimilco,Coyoacan,19.304441,-99.103629,2246
+UIZ,UAM Iztapalapa,Iztapalapa,19.360794,-99.07388,2221
+VIF,Villa de las Flores,Coacalco,19.658223,-99.09659,2242
+XAL,Xalostoc,Ecatepec,19.525995,-99.0824,2160

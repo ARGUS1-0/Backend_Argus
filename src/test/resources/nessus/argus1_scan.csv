@@ -1,0 +1,21 @@
+﻿Plugin ID,CVE,CVSS v2.0 Base Score,Risk,Host,Protocol,Port,Name,Synopsis,Description,Solution,See Also,Plugin Output,CVSS v3.0 Base Score
+100634,,10.0,Critical,10.128.0.10,tcp,6379,Redis Server Unprotected by Password Authentication,The remote Redis server does not require authentication.,"The Redis server running on the remote host is not protected by password authentication. A remote attacker can exploit this to gain unauthorized access to the server, read and modify data, and in some configurations execute commands.","Enable the 'requirepass' directive in the redis.conf configuration file.",https://redis.io/docs/latest/operate/oss_and_stack/management/security/,"Nessus was able to execute the 'INFO' command without authentication:
+
+  redis_version:4.0.14
+  os:Linux 5.15.0-1057-gcp x86_64",9.8
+150105,CVE-2021-32626,6.5,High,10.128.0.10,tcp,6379,Redis 4.0.x < 5.0.13 Multiple Vulnerabilities,The remote Redis server is affected by multiple vulnerabilities.,Specially crafted Lua scripts may cause a heap-based buffer overflow.,Upgrade to Redis 6.0.15 or later.,https://github.com/redis/redis/security/advisories/GHSA-p486-xggp-782c,"  Installed version : 4.0.14
+  Fixed version     : 5.0.13",7.5
+150105,CVE-2021-32627,6.5,High,10.128.0.10,tcp,6379,Redis 4.0.x < 5.0.13 Multiple Vulnerabilities,The remote Redis server is affected by multiple vulnerabilities.,Specially crafted Lua scripts may cause a heap-based buffer overflow.,Upgrade to Redis 6.0.15 or later.,https://github.com/redis/redis/security/advisories/GHSA-f434-69fm-g45v,"  Installed version : 4.0.14
+  Fixed version     : 5.0.13",7.5
+150105,CVE-2021-32628,6.5,High,10.128.0.10,tcp,6379,Redis 4.0.x < 5.0.13 Multiple Vulnerabilities,The remote Redis server is affected by multiple vulnerabilities.,Specially crafted Lua scripts may cause a heap-based buffer overflow.,Upgrade to Redis 6.0.15 or later.,https://github.com/redis/redis/security/advisories/GHSA-f434-69fm-g45v,"  Installed version : 4.0.14
+  Fixed version     : 5.0.13",7.5
+57582,,6.4,Medium,10.128.0.10,tcp,27017,SSL Self-Signed Certificate,The SSL certificate chain for this service ends in an unrecognized self-signed certificate.,The X.509 certificate chain for this service is not signed by a recognized certificate authority.,Purchase or generate a proper SSL certificate for this service.,,"The following certificate was found at the top of the certificate
+chain sent by the remote host, but is self-signed and was not
+found in the list of known certificate authorities :
+
+|-Subject : CN=mongodb.argus.local",6.5
+51192,,6.4,Medium,10.128.0.10,tcp,27017,SSL Certificate Cannot Be Trusted,The SSL certificate for this service cannot be trusted.,The server's X.509 certificate cannot be trusted.,Purchase or generate a proper SSL certificate for this service.,https://www.itu.int/rec/T-REC-X.509/en https://en.wikipedia.org/wiki/X.509,,6.5
+84729,"CVE-2015-2573, CVE-2015-2582",6.8,Medium,10.128.0.10,tcp,3306,MySQL 5.5.x < 5.5.44 Multiple Vulnerabilities,The remote database server is affected by multiple vulnerabilities.,The version of MySQL running on the remote host is 5.5.x prior to 5.5.44.,Upgrade to MySQL version 5.5.44 or later.,,"  Installed version : 5.5.40",5.5
+84729,CVE-2015-4757,6.8,Medium,10.128.0.10,tcp,3306,MySQL 5.5.x < 5.5.44 Multiple Vulnerabilities,The remote database server is affected by multiple vulnerabilities.,The version of MySQL running on the remote host is 5.5.x prior to 5.5.44.,Upgrade to MySQL version 5.5.44 or later.,,"  Installed version : 5.5.40",5.5
+10107,,,None,10.128.0.10,tcp,3000,HTTP Server Type and Version,A web server is running on the remote host.,This plugin attempts to determine the type and the version of the remote web server.,n/a,,Server: Express,
+70658,CVE-2008-5161,2.6,Low,10.128.0.10,tcp,22,SSH Server CBC Mode Ciphers Enabled,The SSH server is configured to use Cipher Block Chaining.,The SSH server is configured to support CBC encryption.,Disable CBC mode cipher encryption.,,,3.7
